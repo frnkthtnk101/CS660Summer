@@ -22,4 +22,9 @@ print(text)'''
 def Main():
     for i in range (1,1000):
         url = f'http://www.gutenberg.org/files/{i}/{i}-0.txt'
+        try:
+            response = urllib.request.urlopen(url)
+            data = response.read()      # a `bytes` object
+            text = data.decode('utf-8')
+        
         
