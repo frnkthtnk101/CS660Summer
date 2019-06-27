@@ -3,18 +3,23 @@
 
 import urllib.request
 
-''' when everything works according to plan (no 404)
-url = 'http://www.gutenberg.org/files/59812/59812-0.txt'
+# when everything works according to plan (no 404)
+'''url = 'http://www.gutenberg.org/files/59812/59812-0.txt'
 response = urllib.request.urlopen(url)
 data = response.read()      # a `bytes` object
 text = data.decode('utf-8') # a `str`; this step can't be used if data is binary
 print(text)
 '''
 
-''' when we get a 404'''
+# when we get a 404
 '''url = 'http://www.gutenberg.org/files/2/2-0.txt'
 response = urllib.request.urlopen(url)
 data = response.read()      # a `bytes` object
 text = data.decode('utf-8') # a `str`; this step can't be used if data is binary
 print(text)'''
-'''urllib.error.HTTPError: HTTP Error 404: Not Found''
+#urllib.error.HTTPError: HTTP Error 404: Not Found
+
+def Main():
+    for i in range (1,1000):
+        url = f'http://www.gutenberg.org/files/{i}/{i}-0.txt'
+        
