@@ -26,8 +26,8 @@ def Main():
         try:
             response = urllib.request.urlopen(url)
             data = response.read()      # a `bytes` object
-            text = data.decode('utf-8')
-            book = open(f'{PATH}book{i}.txt','w')
+            text = data.decode('utf-8-sig')
+            book = open(f'{PATH}book{i}.txt','w',encoding = 'utf-8-sig')
             book.write(text)
             book.close()
         except Exception as e:
