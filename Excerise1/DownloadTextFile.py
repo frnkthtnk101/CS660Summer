@@ -18,6 +18,7 @@ data = response.read()      # a `bytes` object
 text = data.decode('utf-8') # a `str`; this step can't be used if data is binary
 print(text)'''
 #urllib.error.HTTPError: HTTP Error 404: Not Found
+PATH = 'C:\\BTBTestArea\\BTB test area\\FTP\\'
 
 def Main():
     for i in range (1,1000):
@@ -26,5 +27,10 @@ def Main():
             response = urllib.request.urlopen(url)
             data = response.read()      # a `bytes` object
             text = data.decode('utf-8')
+            book = open(f'{PATH}book{i}.txt','w')
+            book.write(text)
+            book.close()
+        except Exception as e:
+            print(e)
         
-        
+Main()
