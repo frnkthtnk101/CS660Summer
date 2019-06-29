@@ -1,13 +1,8 @@
 import string
 import sys
 
-argc = len(sys.argv)
-if argc == 1:
-    print("usage:  freq.pl file")
-    exit()
-elif argc == 2:
-    filename = sys.argv[1]
-    infile = open(filename,'r')
+filename = 'C:\\Users\\Franco\\ws\\CS660Summer\\samples\\book867.txt'
+infile = open(filename,'r')
 
 
 freq = {}
