@@ -13,6 +13,6 @@ a_generator_in_a_cool_way = [square(x) for x in range(1,20)] #generator
 a_list_in_a_cool_way = (square(x) for x in range(1,20)) #list
 is_even_generator = filter(lambda x : x % 2 == 0, a_generator_in_a_cool_way)
 
-for index in is_even_generator:
-    print(index)
+#for index in a_list_in_a_cool_way:
+#    print(index)
 
