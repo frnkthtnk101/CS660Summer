@@ -1,3 +1,6 @@
+#Exercise3.py
+#write a map that uses a list and a function
+#Franco
 import math
 
 a_list_in_a_cool_way =[10, 100, 1000, 10000, 100000, 1000000]

@@ -16,4 +16,3 @@ class word_frequency(MRJob):
 
 if __name__ == '__main__':
     word_frequency.run()
-

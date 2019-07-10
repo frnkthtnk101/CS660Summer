@@ -1,5 +1,7 @@
-#geeks for geeks
-# List of strings 
+#geeks for geeks helped me on this one
+#implement a map using yeild...
+#franco
+
 l = ['sat', 'bat', 'cat', 'mat'] 
 
 def simple_function(x):

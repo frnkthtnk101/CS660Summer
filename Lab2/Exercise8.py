@@ -3,16 +3,17 @@
 #franco
 from mrjob.job import MRJob
 from mrjob.step import MRStep
-#https://stackoverflow.com/questions/53707962/mrjob-sort-reducer-output
 
 
+#pretty much the same thing as exercise 7 but
+#we have the k_word to give us the kth top word
 class MRWordFrequencyCount(MRJob):
 
     k_word = 2
 
     def mapper_extract_words(self, _, line):
         for i in line.split():
-            yield i, len(i)
+            yield i, 1
 
     
     def combiner_words(self, key, values):
