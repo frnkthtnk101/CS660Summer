@@ -2,7 +2,9 @@
 #sort the words
 from mrjob.job import MRJob
 from mrjob.step import MRStep
+import time
 #https://stackoverflow.com/questions/53707962/mrjob-sort-reducer-output
+
 
 
 class MRWordFrequencyCount(MRJob):
@@ -39,4 +41,6 @@ class MRWordFrequencyCount(MRJob):
         ]
 
 if __name__ == '__main__':
+    t0 = time.time()
     MRWordFrequencyCount.run()
+    print(time.time() - t0)
