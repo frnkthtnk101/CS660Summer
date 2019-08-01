@@ -18,18 +18,22 @@ data = response.read()      # a `bytes` object
 text = data.decode('utf-8') # a `str`; this step can't be used if data is binary
 print(text)'''
 #urllib.error.HTTPError: HTTP Error 404: Not Found
-PATH = 'C:\\BTBTestArea\\BTB test area\\FTP\\'
+PATH = '/Users/francopettigrosso/ws/CS660Summer/samples/'
 
 def Main():
-    for i in range (1,1000):
+    success_trys = 0
+    i = 0
+    while success_trys < 1000:
         url = f'http://www.gutenberg.org/files/{i}/{i}-0.txt'
         try:
+            i+=1
             response = urllib.request.urlopen(url)
             data = response.read()      # a `bytes` object
             text = data.decode('utf-8-sig')
             book = open(f'{PATH}book{i}.txt','w',encoding = 'utf-8-sig')
             book.write(text)
             book.close()
+            success_trys += 1
         except Exception as e:
             print(e)
         
