@@ -9,14 +9,18 @@ class page_rank (MRJob):
         row = line.split('|')
         values = row[1].split(' ')
         matrix_name = str(os.environ['mapreduce_map_input_file']).split('/')[-1]
+        is_small_matrix = matrix_name == 'fivebyone.txt'
         values_len = len(values)
         for i in range(0,values_len):
-            yield(int(row[0]),(matrix_name,i,int(values[i])))
+            if is_small_matrix:
+                yield (i+1,(matrix_name,int(row[0]),int(values[i])))
+            else:
+                yield(int(row[0]),(matrix_name,i,int(values[i])))
         
 
 
     def reduce_elements(self, index, values):
-        yield(index, values)
+        yield(index, list(values))
 
     def steps(self):
         return [
