@@ -26,12 +26,21 @@ class page_rank (MRJob):
                 result = int(left[2]) * int(right[2])
                 yield((left[1], right[1]), result) 
     
+    def pass_identity(self, index, values):
+        yield(index, values)
+    
+    def results(self, index, values):
+        yield(index, sum(values))
 
     def steps(self):
         return [
             MRStep(
                 mapper = self.map_elements,
                 reducer = self.reduce_elements
+            ),
+            MRStep(
+                mapper = self.pass_identity,
+                reducer = self.results
             )
         ]
         
