@@ -1,5 +1,6 @@
 from mrjob.job import MRJob
 from mrjob.step import MRStep
+import numpy as np
 import os #needed to get the name of the file
 
 
@@ -13,9 +14,9 @@ class page_rank (MRJob):
         values_len = len(values)
         for i in range(0,values_len):
             if is_small_matrix:
-                    yield (i,(matrix_name,int(row[0]),int(values[i])))
+                    yield (i,(matrix_name,int(row[0]),float(values[i])))
             else:
-                yield(int(row[0]),(matrix_name,i,int(values[i])))
+                yield(int(row[0]),(matrix_name,i,float(values[i])))
         
     def reduce_elements(self, index, values):
         list_of_values = list(values)
@@ -23,7 +24,7 @@ class page_rank (MRJob):
         list_O_rights = [i for i in list_of_values if i[0] == 'fivebyone.txt']
         for left in list_O_left:
             for right in list_O_rights:
-                result = int(left[2]) * int(right[2])
+                result = np.power(left[2],2) * right[2]
                 yield((left[1], right[1]), result) 
     
     def pass_identity(self, index, values):
