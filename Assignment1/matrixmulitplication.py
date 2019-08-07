@@ -22,9 +22,11 @@ class page_rank (MRJob):
         list_of_values = list(values)
         list_O_left = [i for i in list_of_values if i[0] == 'fivebyfive.txt']
         list_O_rights = [i for i in list_of_values if i[0] == 'fivebyone.txt']
+        beta = .8
+        i_beta = round((1-beta)/4,5)
         for left in list_O_left:
             for right in list_O_rights:
-                result = np.power(left[2],2) * right[2]
+                result = ((np.power(left[2],1) * beta) * right[2]) + i_beta
                 yield((left[1], right[1]), result) 
     
     def pass_identity(self, index, values):
