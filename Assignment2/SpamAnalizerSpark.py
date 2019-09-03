@@ -1,6 +1,6 @@
 from pyspark import SparkContext
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import lower, col, regexp_replace
+from pyspark.sql.functions import *
 from pyspark.sql.types import StringType, StructField, StructType
 from os import path
 sc = SparkContext("local", "spam_to_ham")
@@ -9,7 +9,19 @@ home = "/Users/francopettigrosso/ws/CS660Summer/samples/"
 trained_data = home+"trained_data.csv"
 training_data = home+"training_data.csv"
 input_text = home+"sentences.txt"
-money_regex = r"\$|€|£"
+words = r"([a-z|A-Z]+)"
+stop_words = ['ourselves', 'hers', 'between', 'yourself', 'but', 'again', 'there', 'about', 
+   'once', 'during', 'out', 'very', 'having', 'with', 'they', 'own', 'an', 'be', 'some', 'for',
+   'do', 'its', 'yours', 'such', 'into', 'of', 'most', 'itself', 'other', 'off', 'is', 's', 'am', 
+   'or', 'who', 'as', 'from', 'him', 'each', 'the', 'themselves', 'until', 'below', 'are', 'we', 
+   'these', 'your', 'his', 'through', 'don', 'nor', 'me', 'were', 'her', 'more', 'himself', 'this', 
+   'down', 'should', 'our', 'their', 'while', 'above', 'both', 'up', 'to', 'ours', 'had', 'she', 'all', 
+   'no', 'when', 'at', 'any', 'before', 'them', 'same', 'and', 'been', 'have', 'in', 'will', 'on', 'does',
+   'yourselves', 'then', 'that', 'because', 'what', 'over', 'why', 'so', 'can', 'did', 'not',
+   'now', 'under', 'he', 'you', 'herself', 'has', 'just', 'where', 'too', 'only', 'myself', 'which',
+   'those', 'i', 'after', 'few', 'whom', 't', 'being', 'if', 'theirs', 'my', 'against', 'a', 'by',
+   'doing', 'it', 'how', 'further', 'was', 'here', 'than' ]
+
 
 '''
 mama mia mama mia
@@ -34,9 +46,8 @@ else:
     raw_data.printSchema()
     raw_data.show(5)
     #clean up data...
-    raw_data = raw_data \
-    .withColumn('content', lower(col('content'))) \
-    .withColumn('content', regexp_replace(col('content'),money_regex,'normalized_currency'))
+    raw_data = raw_data.withColumn('content', lower(col('content')))
+    raw_data = raw_data.withColumn('content', split(col('content'),' '))
     '''
     from there, we just need to get rid of all the special chars and
     stuff so we can just have words.
@@ -49,6 +60,3 @@ else:
     next we just need to make the words into something we can work
     with... easy just the word and its count
     '''
-
-
-    

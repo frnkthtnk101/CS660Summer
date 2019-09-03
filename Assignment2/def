@@ -1,0 +1,30 @@
+def reducer_do_calculation(self, dictionaries, _):
+    ham_sum = 0
+    spam_sum = 0
+    ham_probability = 1
+    spam_probability = 1
+    ham_keys = dictionaries[0].keys()
+    spam_keys = dictionaries[1].keys()
+    list_text = WORD_RE.findall(TXT_MESSAGE)
+    for i in ham_keys:
+        ham_sum += dictionaries[0][i]
+    for i in spam_keys:
+        spam_sum += dictionaries[1][i]
+    for i in list_text:
+        if i not in spam_keys:
+            dictionaries[1][i] = 1
+            spam_sum+=1
+        if i not in ham_keys:
+            dictionaries[0][i] = 1
+            ham_sum += 1
+
+    for i in list_text:
+        spam_probability += math.log10(dictionaries[1][i] / spam_sum)
+        ham_probability += math.log10(dictionaries[0][i] / ham_sum)
+
+    if ham_probability > spam_probability:
+        yield 'ham', None
+        
+    if ham_probability < spam_probability:
+        yield 'spam', None
+        
